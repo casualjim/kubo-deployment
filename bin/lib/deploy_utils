@@ -117,6 +117,10 @@ generate_manifest() {
     ;;
   esac
 
+  if [[ "$iaas" == "gcp" ]]; then
+    manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/gce-cloud-provider.yml")
+  fi
+
   if [ -f "${manifest_dir}/ops-files/${iaas}-cloud-provider.yml" ]; then
     manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/${iaas}-cloud-provider.yml" -v director_uuid="${director_uuid}")
   fi
