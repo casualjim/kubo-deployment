@@ -10,11 +10,9 @@ repository.
 
 ## Accessing an application on GCP with IaaS Load-Balancing
 
-An additional load balancer is provisioned using Terraform during the setup in our guide. 
-You can access the service using the external IP address of the  `kubo-workers` load 
-balancer and the `NodePort` of your service.
+On GCP you can expose routes using service type LoadBalancer for your Kubernetes deployments. See the [Kubernetes docs](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose-intro/) for more details.
 
-1. Access your service from your browser at `<IP address of the load balancer>:<NodePort>`
+> **Note:** Any resources that are provisioned by Kubernetes will not be deleted by BOSH when you delete your Kubo deployment. You will need to manage these resources if they are not deleted by Kubernetes before the deployment is deleted.
 
 ## Accessing an application on AWS with IaaS Load-Balancing
 
