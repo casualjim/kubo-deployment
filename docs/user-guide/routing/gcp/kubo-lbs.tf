@@ -58,18 +58,6 @@ resource "google_compute_firewall" "kubo-tcp-public" {
   target_tags = ["master"]
 }
 
-resource "google_compute_firewall" "kubo-workers-tcp-public" {
-  name    = "${var.prefix}kubo-workers-tcp-public"
-  network       = "${var.network}"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["30000-32767"]
-  }
-
-  target_tags = ["worker"]
-}
-
 output "kubo_master_target_pool" {
    value = "${google_compute_target_pool.kubo-tcp-public.name}"
 }
