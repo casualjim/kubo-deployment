@@ -71,6 +71,14 @@ data "google_iam_policy" "admin" {
   }
 
   binding {
+    role = "roles/compute.securityAdmin"
+
+    members = [
+      "serviceAccount:${google_service_account.kubo.email}",
+    ]
+  }
+
+  binding {
     role = "roles/compute.instanceAdmin"
 
     members = [
