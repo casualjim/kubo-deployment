@@ -88,10 +88,6 @@ generate_manifest() {
     manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/add-no-proxy.yml")
   fi
 
-  if [ "$(bosh-cli int "${bosh_environment}/director.yml" --path='/iaas')" == "gcp" ]; then
-    manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/gce-cloud-provider.yml")
-  fi
-
   case "$routing_mode" in
     cf)
       manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/cf-routing.yml")
@@ -116,10 +112,6 @@ generate_manifest() {
       fi
     ;;
   esac
-
-  if [ -e "${manifest_dir}/ops-files/${iaas}-cloud-provider.yml" ]; then
-    manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/${iaas}-cloud-provider.yml")
-  fi
 
   if [ -f "${manifest_dir}/ops-files/${iaas}-cloud-provider.yml" ]; then
     manifest=$(echo "$manifest" | bosh-cli int - --ops-file="${manifest_dir}/ops-files/${iaas}-cloud-provider.yml" -v director_uuid="${director_uuid}")
